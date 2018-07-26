@@ -22,6 +22,7 @@ var UserSchema = new Schema({
             }, 'Password should be longer'
         ]
     },
+    role:String,
     salt: {
         type: String
     },

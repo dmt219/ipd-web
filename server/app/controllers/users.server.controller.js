@@ -1,5 +1,7 @@
 var User = require('mongoose').model('User'),
-    passport = require('passport');
+    passport = require('passport'),
+    ConnectRoles = require('connect-roles');
+
 var getErrorMessage = function (err) {
     var message = '';
     if (err.code) {
@@ -44,6 +46,7 @@ exports.signup = function (req, res, next) {
         var user = new User(req.body);
         var message = null;
         user.provider = 'local';
+        user.role='moderator';
         user.save(function (err) {
             if (err) {
                 var message = getErrorMessage(err);

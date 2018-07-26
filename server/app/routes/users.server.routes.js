@@ -1,5 +1,6 @@
 var users = require('../../app/controllers/users.server.controller'),
     passport = require('passport');
+    
 module.exports = function (app) {
     app.route('/signup')
         .get(users.renderSignup)
@@ -12,4 +13,16 @@ module.exports = function (app) {
             failureFlash: true
         }));
     app.get('/signout', users.signout);
+
+    /*privileged routes*/
+    require('../config/roles')(app);
+    app.get('/private', user.can('access private page'), function (req, res) {
+        res.render('private');
+    });
+    app.get('/admin', user.can('access admin page'), function (req, res) {
+        res.render('admin');
+    });
+
+    
+
 };

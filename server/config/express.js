@@ -7,7 +7,7 @@ var config = require('./config'),
     session = require('express-session'),
     flash = require('connect-flash'),
     passport = require('passport');
-    
+
 module.exports = function () {
     var app = express();
     if (process.env.NODE_ENV === 'development') {
@@ -16,7 +16,7 @@ module.exports = function () {
         app.use(compress());
     }
     app.use(bodyParser.urlencoded({
-        extended: true
+        extended: false
     }));
     app.use(bodyParser.json());
     app.use(methodOverride());

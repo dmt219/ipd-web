@@ -1,18 +1,16 @@
 var mongoose = require('mongoose'),
     crypto = require('crypto'),
     Schema = mongoose.Schema;
+
 var UserSchema = new Schema({
     firstName: String,
     lastName: String,
     email: {
         type: String,
-        match: [/.+\@.+\..+/, "Please fill a valid e-mail address"]
-    },
-    username: {
-        type: String,
         unique: true,
-        required: 'Username is required',
-        trim: true
+        required: 'Email is required',
+        trim: true,
+        match: [/.+\@.+\..+/, "Please fill a valid e-mail address"]
     },
     password: {
         type: String,
@@ -61,27 +59,11 @@ UserSchema.methods.hashPassword = function (password) {
 UserSchema.methods.authenticate = function (password) {
     return this.password === this.hashPassword(password);
 };
-UserSchema.statics.findUniqueUsername = function (username, suffix,
-    callback) {
-    var _this = this;
-    var possibleUsername = username + (suffix || '');
-    _this.findOne({
-        username: possibleUsername
-    }, function (err, user) {
-        if (!err) {
-            if (!user) {
-                callback(possibleUsername);
-            } else {
-                return _this.findUniqueUsername(username, (suffix || 0) +
-                    1, callback);
-            }
-        } else {
-            callback(null);
-        }
-    });
-};
+
+
 UserSchema.set('toJSON', {
     getters: true,
     virtuals: true
 });
-mongoose.model('User', UserSchema);
+
+module.exports = mongoose.model('User', UserSchema);

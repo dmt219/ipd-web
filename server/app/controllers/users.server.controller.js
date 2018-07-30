@@ -8,7 +8,7 @@ var getErrorMessage = function (err) {
         switch (err.code) {
             case 11000:
             case 11001:
-                message = 'Username already exists';
+                message = 'Email already used';
                 break;
             default:
                 message = 'Something went wrong';
@@ -49,6 +49,7 @@ exports.signup = function (req, res, next) {
         user.role='moderator';
         user.save(function (err) {
             if (err) {
+                console.log(err);
                 var message = getErrorMessage(err);
                 req.flash('error', message);
                 return res.redirect('/signup');
@@ -62,6 +63,7 @@ exports.signup = function (req, res, next) {
         return res.redirect('/');
     }
 };
+
 exports.signout = function (req, res) {
     req.logout();
     res.redirect('/');

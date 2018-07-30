@@ -19,6 +19,10 @@ module.exports = function (app) {
     app.route('/forgot')
         .get(users.renderForgot)
         .post(users.forgot);
+
+    app.route('/reset/:token')
+        .get(users.renderReset)
+        .post(users.reset);
     /*testing*/
     app.get('/usersList', function(req, res) {
         User.find({}, function(err, users) {
@@ -31,6 +35,8 @@ module.exports = function (app) {
           res.send(userMap);  
         });
       });
+
+      
 
     /*privileged routes
     require('../../config/roles')(app);

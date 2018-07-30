@@ -16,6 +16,9 @@ module.exports = function (app) {
     );
     app.get('/signout', users.signout);
 
+    app.route('/forgot')
+        .get(users.renderForgot)
+        .post(users.forgot);
     /*testing*/
     app.get('/usersList', function(req, res) {
         User.find({}, function(err, users) {

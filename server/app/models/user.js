@@ -33,7 +33,9 @@ var UserSchema = new Schema({
     created: {
         type: Date,
         default: Date.now
-    }
+    },
+    resetPasswordToken: String,
+    resetPasswordExpires: Date
 });
 UserSchema.virtual('fullName').get(function () {
     return this.firstName + ' ' + this.lastName;

@@ -140,13 +140,12 @@ exports.renderReset = function (req, res) {
             req.flash('error', 'Password reset token is invalid or has expired.');
             return res.redirect('/forgot');
         }
-        if(!req.user){
+        if (!req.user) {
             res.render('reset', {
                 title: 'Reset Password Form',
                 messages: req.flash('error')
             });
-        }
-        else{
+        } else {
             return res.redirect("/");
         }
     });
@@ -201,6 +200,29 @@ exports.reset = function (req, res) {
     });
 };
 
+exports.saveOAuthUserProfile = function (req, profile, done) {
+    User.findOne({
+        email: req.body.email
+    }, function (err, user) {
+        if (err) {
+            return done(err);
+        } else {
+            if (!user) {
+                user = new User(profile);
+                user.save(function (err) {
+                    if (err) {
+                        req.flash('error', 'Cannot save user');
+                        console.log(err);
+                        return res.redirect('/signup');
+                    }
+                    return done(err, user);
+                });
+            } else {
+                return done(err, user);
+            }
+        }
+    });
+};
 
 exports.signout = function (req, res) {
     req.logout();

@@ -25,7 +25,7 @@ module.exports = function () {
         resave: true,
         secret: config.sessionSecret
     }));
-    app.set('views', './app/views');
+    app.set('views', '../client/public/views');
     app.set('view engine', 'ejs');
     app.use(flash());
     app.use(passport.initialize());
@@ -33,6 +33,7 @@ module.exports = function () {
     require('../config/roles')(app);
     require('../app/routes/index.server.routes.js')(app);
     require('../app/routes/users.server.routes.js')(app);
-    app.use(express.static('./public'));
+    app.use(express.static('../client/public'));
+
     return app;
 };

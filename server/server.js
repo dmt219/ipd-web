@@ -7,4 +7,4 @@ var app = express();
 var passport = passport();
 app.listen(3000);
 module.exports = app;
-console.log('Server running at http://localhost:3000/');
+console.log('Server running at http://10.20.20.226:3000/');

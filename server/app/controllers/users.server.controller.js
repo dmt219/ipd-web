@@ -104,7 +104,7 @@ exports.forgot = function (req, res, next) {
         },
         function (token, user, done) {
             var smtpTransport = nodemailer.createTransport({
-                host: 'localhost',
+                host: '10.20.20.226',
                 port: 587,
                 service: 'SendGrid',
                 auth: config.mailer
@@ -178,7 +178,7 @@ exports.reset = function (req, res) {
         },
         function (user, done) {
             var smtpTransport = nodemailer.createTransport({
-                host: 'localhost',
+                host: '10.20.20.226',
                 port: 587,
                 service: 'SendGrid',
                 auth: config.mailer

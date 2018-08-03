@@ -33,6 +33,7 @@ module.exports = function () {
     require('../config/roles')(app);
     require('../app/routes/index.server.routes.js')(app);
     require('../app/routes/users.server.routes.js')(app);
+    require('../app/routes/file.server.routes.js')(app);
     app.use(express.static('../client/public'));
 
     return app;

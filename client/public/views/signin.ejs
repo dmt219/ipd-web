@@ -2,34 +2,65 @@
 <html>
 
 <head>
-    <title>
-        <%=title %>
-    </title>
+    <title>Login Page</title>
+    <title>Login Template</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/signin.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <% for(var i in messages) { %>
-        <div class="flash">
-            <%= messages[i] %>
+    <div class="container">
+        <div class="sign-in-option"> 
+            <h2>Sign In</h2>
+            <div class="sign-in-group-item">
+                <a href="/oauth/facebook" class="fb btn">
+                    <i class="fa fa-facebook fa-fw"></i> Signin with Facebook
+                </a>
+                <a href="/oauth/google" class="google btn">
+                    <i class="fa fa-google fa-fw"></i> Signin with Google+
+                </a>
+            </div>
+            <center>
+                <p>or signin with IPD</p>
+                <center>
+                    <form class="manual" action="/signin" method="post">
+                        <div class="email">
+                            <label>Email:</label>
+                            <input type="text" name="email" />
+                        </div>
+                        <div class="password">
+                            <label>Password:</label>
+                            <input type="password" name="password" />
+                        </div>
+                        <div class="submit">
+                            <input type="submit" value="Sign In" />
+                        </div>
+                    </form>
+                </center>
+                <center>
+                    <div class="forgot">
+                        <a href="/forgot">Forgot Password?</a>
+                    </div>
+                </center>
+            </center>
         </div>
-        <% } %>
-            <form action="/signin" method="post">
-                <div>
-                    <label>Email:</label>
-                    <input type="text" name="email" />
-                </div>
-                <div>
-                    <label>Password:</label>
-                    <input type="password" name="password" />
-                </div>
-                <div>
-                    <input type="submit" value="Sign In" />
-                </div>
-            </form>
-            <a href="/oauth/google">Sign in with Google</a>
-            <a href="/oauth/facebook">Sign in with Facebook</a>
-            <div><a href="/forgot">Forgot Password</a></div>
-            
+        <div class ="sign-in-perk">
+                <h2>Benefits of your free IPD account</h2>
+                <p>
+                    <strong>Customize Strategy</strong>
+                    <br>
+                    Adjust simulation settings.
+                </p>
+                <p>
+                    <strong>Personal Page</strong>
+                    <br>
+                    Upload and run your personal javascript strategy.
+                </p>
+        </div>
+    </div>
 </body>
 
 </html>

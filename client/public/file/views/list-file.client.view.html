@@ -1,0 +1,17 @@
+<section data-ng-controller="FileController" data-ng-init="find()">
+    <h1>File</h1>
+    <ul>
+        <li data-ng-repeat="file in file">
+            <a data-ng-href="#!/file/{{file._id}}" data-ng- bind="file.title"></a>
+            <br>
+            <small data-ng-bind="file.created | date:'medium'"></small>
+            <small>/</small>
+            <small data-ng-bind="file.creator.fullName"></small>
+            <p data-ng-bind="file.content"></p>
+        </li>
+    </ul>
+    <div data-ng-hide="!file || file.length">
+        No files yet, why don't you
+        <a href="/#!/file/create">create one</a>?
+    </div>
+</section>

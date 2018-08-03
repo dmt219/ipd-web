@@ -1,0 +1,11 @@
+{
+  "name": "ipd-web",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular-route": "~1.2",
+    "angular-resource": "~1.2"
+  },
+  "resolutions": {
+    "angular": "1.2.32"
+  }
+}

@@ -8,10 +8,11 @@
             <small>/</small>
             <small data-ng-bind="file.creator.fullName"></small>
             <p data-ng-bind="file.content"></p>
+            <a href="#!/file/{{file._id}}">View file</a>
         </li>
     </ul>
     <div data-ng-hide="!file || file.length">
         No files yet, why don't you
-        <a href="/#!/file/create">create one</a>?
+        <a href="api#!/file/create">create one</a>?
     </div>
 </section>

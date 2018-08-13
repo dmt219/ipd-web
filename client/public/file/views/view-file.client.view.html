@@ -1,7 +1,7 @@
 <section data-ng-controller="FileController" data-ng-init="findOne()">
     <h1 data-ng-bind="file.title"></h1>
     <div data-ng-show="authentication.user._id == file.creator._id">
-        <a href="/#!/file/{{file._id}}/edit">edit</a>
+        <a href="/api#!/file/{{file._id}}/edit">edit</a>
         <a href="#" data-ng-click="delete();">delete</a>
     </div>
     <small>
@@ -11,4 +11,5 @@
         <em data-ng-bind="file.creator.fullName"></em>
     </small>
     <p data-ng-bind="file.content"></p>
+    <button ng-click="download()">download</button>
 </section>

@@ -15,22 +15,6 @@ module.exports=function(app){
         }
     })
 
-    //anonymous users can only access the home page
-    //returning false stops any more rules from being
-    //considered
-    user.use(function (req, action) {
-        if (!passport.authenticate('local')) return action === 'access home page';
-    })
-
-    //moderator users can access private page, but
-    //they might not be the only ones so we don't return
-    //false if the user isn't a moderator
-    user.use('access private page', function (req) {
-        if (req.user.role === 'moderator') {
-        return true;
-        }
-    })
-
     //admin users can access all pages
     user.use(function (req) {
         if (req.user.role === 'admin') {

@@ -1,1 +1,1 @@
-angular.module('file', []);
+angular.module('file',[]);

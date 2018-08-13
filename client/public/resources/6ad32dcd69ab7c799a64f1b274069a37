@@ -1,0 +1,11 @@
+var mainApplicationModuleName = 'ipd-web';
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngFileUpload','ngResource','ngRoute','angular-filepicker','users','example','file']);
+mainApplicationModule.config(['$locationProvider','filepickerProvider',
+    function ($locationProvider) {
+        $locationProvider.hashPrefix('!');
+    }
+]);
+if (window.location.hash === '#_=_') window.location.hash = '#!';
+angular.element(document).ready(function () {
+    angular.bootstrap(document, [mainApplicationModuleName]);
+});

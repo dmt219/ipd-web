@@ -6,7 +6,8 @@ var config = require('./config'),
     methodOverride = require('method-override'),
     session = require('express-session'),
     flash = require('connect-flash'),
-    passport = require('passport');
+    passport = require('passport'),
+    multer=require('multer');
 
 module.exports = function () {
     var app = express();
@@ -16,7 +17,7 @@ module.exports = function () {
         app.use(compress());
     }
     app.use(bodyParser.urlencoded({
-        extended: false
+        extended: true
     }));
     app.use(bodyParser.json());
     app.use(methodOverride());
@@ -28,9 +29,11 @@ module.exports = function () {
     app.set('views', '../client/public/views');
     app.set('view engine', 'ejs');
     app.use(flash());
+    app.use(multer({dest:'../client/public/resources'}).single('file'));
     app.use(passport.initialize());
     app.use(passport.session());
     require('../config/roles')(app);
+    require('../app/routes/IPD.server.routes.js')(app);
     require('../app/routes/index.server.routes.js')(app);
     require('../app/routes/users.server.routes.js')(app);
     require('../app/routes/file.server.routes.js')(app);

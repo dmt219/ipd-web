@@ -1,7 +1,7 @@
 var users = require('../../app/controllers/users.server.controller'),
-    passport = require('passport'),
-    User = require('mongoose').model('User'); /*testing*/
-
+    passport = require('passport');
+var User = require('mongoose').model('User'); /*testing*/
+var File = require('mongoose').model('File');/*testing*/
 module.exports = function (app) {
     app.route('/signup')
         .get(users.renderSignup)
@@ -25,7 +25,7 @@ module.exports = function (app) {
         .get(users.renderReset)
         .post(users.reset);
 
-    app.get('/oauth/facebook', passport.authenticate('facebook', {
+    app.get('/oauth/facebook',passport.authenticate('facebook', {
         scope: ['email']
     }, {
         failureRedirect: '/signin'
@@ -35,7 +35,7 @@ module.exports = function (app) {
         successRedirect: '/'
     }));
 
-    app.get('/oauth/google', passport.authenticate('google', {
+    app.get('/oauth/google',passport.authenticate('google', {
         failureRedirect: '/signin',
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
@@ -56,6 +56,18 @@ module.exports = function (app) {
             });
 
             res.send(userMap);
+        });
+    });
+
+    app.get('/fileList', function (req, res) {
+        File.find({}, function (err, datas) {
+            var dataMap = {};
+
+            datas.forEach(function (data) {
+                dataMap[data._id] = data;
+            });
+
+            res.send(dataMap);
         });
     });
 

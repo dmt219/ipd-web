@@ -1,23 +1,32 @@
 <section data-ng-controller="FileController">
     <h1>New File</h1>
-    <form data-ng-submit="create()" novalidate>
+    <form name="myForm">
         <div>
             <label for="title">Title</label>
             <div>
-                <input type="text" data-ng-model="title" id="title" placeholder="Title" required>
-            </div>
+                <input type="text" ng-model="title" id="title" placeholder="Title">
+            </div>  
         </div>
         <div>
             <label for="content">Content</label>
             <div>
-                <textarea data-ng-model="content" id="content" cols="30" rows="10" placeholder="Content"></textarea>
+                <textarea ng-model="content" id="content" cols="30" rows="10" placeholder="Content"></textarea>
             </div>
         </div>
         <div>
-            <input type="submit">
-        </div>
-        <div data-ng-show="error">
-            <strong data-ng-bind="error"></strong>
-        </div>
-    </form>
+            <input type="file" ngf-select ng-model="file" name="file" required>
+            <i ng-show="myForm.file.$error.required">*required</i><br>
+            <i ng-show="myForm.file.$valid" ngf-thumbnail="file" class="thumb"> <button ng-click="file = null" ng-show="file">Remove</button>
+            <br>
+            <button ng-disabled="!myForm.$valid" 
+                    ng-click="uploadFile(file)">Submit</button>
+            <span class="progress" ng-show="file.progress >= 0">
+              <div style="width:{{file.progress}}%" 
+                  ng-bind="file.progress + '%'"></div>
+            </span>
+            <span ng-show="file.result">Upload Successful</span>
+            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+          </fieldset>
+          <br>
+        </form>
 </section>

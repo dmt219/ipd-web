@@ -3,7 +3,8 @@ var User = require('mongoose').model('User'),
     async = require('async'),
     nodemailer = require('nodemailer'),
     crypto = require('crypto'),
-    config = require('../../config/config')
+    config = require('../../config/config'),
+    multer=require('../../config/multer')
 ConnectRoles = require('connect-roles');
 
 var getErrorMessage = function (err) {

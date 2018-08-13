@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 var File = new Schema({
+    _id: String,
     created: {
         type: Date,
         default: Date.now
@@ -19,6 +20,15 @@ var File = new Schema({
     creator: {
         type: Schema.ObjectId,
         ref: 'User'
+    },
+    file: {
+        type:String
+    },
+    originalName: {
+        type:String
+    },
+    shared:{
+        type:Boolean
     }
-});
+},{ _id: false });
 mongoose.model('File', File);
